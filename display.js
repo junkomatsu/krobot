@@ -7,6 +7,8 @@ var exec = require('child_process').exec
  */
 function Display() {
   // initialize
+  this.avatar_url = undefined;
+  this.avatar_filename = undefined;
 }
 
 /**
@@ -19,16 +21,24 @@ Display.prototype = {
     exec('fim -a ' + filename);
   }, 
 
-  display_url : function(url) {
-    request(url, function(error, response, body) {
+  displaySemaphore : function(char) {
+    var semaphore_filename = __dirname + 'resources/semaphore/' + char.charAt(0).toLowerCase() + '.jpg';
+    this.display(semaphore_filename);
+  },
+
+  setAvatar : function(url) {
+    var self = this;
+    request({ uri: url, encoding: 'binary'}, function(error, response, body) {
       if (!error && response.statusCode == 200) {
         var filename = new Date().getTime();
-        fs.writeFile("/tmp/" + filename, body, function(err) {
+        fs.writeFile("/tmp/" + filename, body, 'binary', function(err) {
           if (err) {
             console.log(err);
           } else {
+            this.avatar_url = url;
+            this.avatar_filename = "/tmp/" + filename;
             console.log("URL : " + url + " write to /tmp/" + filename);
-            display("/tmp/" + filename);
+            self.display(this.avatar_filename);
           }
         });
       }

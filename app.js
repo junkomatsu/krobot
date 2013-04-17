@@ -67,6 +67,7 @@ function(accessToken, refreshToken, profile, done) {
   console.log(profile);
   process.nextTick(function() {
     profile.image = 'https://graph.facebook.com/' + profile.username + '/picture';
+    display.setAvatar(profile.image);
     done(null, profile);
   });
 }));
@@ -84,6 +85,7 @@ function(token, tokenSecret, profile, done) {
   console.log(profile);
   process.nextTick(function () {
     profile.image = profile.photos[0].value;
+    display.setAvatar(profile.image);
     return done(null, profile);
   });
 }));
