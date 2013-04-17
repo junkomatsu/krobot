@@ -3,11 +3,21 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-repeat: no-repeat;
   background-size: 100%;
-  text-align: center;
 }
 
 a {
-  color: #00B7FF;
+  color: #E30B5D;
+}
+
+a.loginbutton {
+  font-size: 40pt;
+}
+div#command {
+  text-align: right;
+}
+
+div#container {
+  text-align: center;
 }
 
 a.button {

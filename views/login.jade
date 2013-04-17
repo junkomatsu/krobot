@@ -1,0 +1,16 @@
+doctype 5
+html
+  head
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(src='javascripts/site.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(name='viewport', content='width=800,user-scalable=no')
+body
+  #container
+    h1 Login to Realspace Avatar Machine
+    div 
+      a.loginbutton(href='/auth/facebook')
+        img(src='/images/fb_btn.jpg')
+      span  
+      a.loginbutton(href='/auth/twitter')
+        img(src='/images/tw_btn.jpg')
