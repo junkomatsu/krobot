@@ -1,0 +1,17 @@
+doctype 5
+html
+  head
+    script(src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(src='javascripts/site.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(name='viewport', content='width=800,user-scalable=no')
+body(style='background: url(http://#{host}:8081/) no-repeat; background-size: 100%;', ontouchmove='event.preventDefault();')
+  #container
+    div 
+      a#go.button(href='#') ▲
+    div
+      a#left.button(href='#') ◀
+      a#stop.button(href='#') ■
+      a#right.button(href='#') ▶
+    div
+      a#back.button(href='#') ▼
