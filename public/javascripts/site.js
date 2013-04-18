@@ -15,4 +15,3 @@ $(document).ready(function() {
     $.get('/right'); return false;
   });
 });
-~            
