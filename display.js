@@ -1,4 +1,4 @@
-var exec = require('child_process').exec
+var spawn = require('child_process').spawn
   , request = require('request')
   , fs = require('fs');
 
@@ -9,6 +9,9 @@ function Display() {
   // initialize
   this.avatar_url = undefined;
   this.avatar_filename = undefined;
+  this.index = 0;
+  this.string = 'ktkr';
+  this.fim = undefined;
 }
 
 /**
@@ -18,11 +21,13 @@ function Display() {
 Display.prototype = {
 
   display : function(filename) {
-    exec('fim -a ' + filename);
+    console.log(filename);
+    if(this.fim != undefined) { this.fim.kill(); this.fim = undefined; }
+    this.fim = spawn('fim', ['-a', filename]);
   }, 
 
   displaySemaphore : function(char) {
-    var semaphore_filename = __dirname + 'resources/semaphore/' + char.charAt(0).toLowerCase() + '.jpg';
+    var semaphore_filename = __dirname + '/resources/semaphore/' + char.charAt(0).toLowerCase() + '.jpg';
     this.display(semaphore_filename);
   },
 
@@ -39,10 +44,28 @@ Display.prototype = {
             this.avatar_filename = "/tmp/" + filename;
             console.log("URL : " + url + " write to /tmp/" + filename);
             self.display(this.avatar_filename);
+            self.startAnimation();
           }
         });
       }
     })
+  },
+
+  setStringForAnimation : function(string) {
+    this.string = string;
+  },
+
+  startAnimation : function() {
+    this.timerId = setInterval(this.animationLoop, 2000, this);
+  },
+
+  stopAnimation : function() {
+    clearInterval(this.timerId);
+  },
+
+  animationLoop : function(self) {
+    console.log('animation loop');
+    self.displaySemaphore(self.string.charAt(self.index++ % self.string.length));
   }
 };
 
