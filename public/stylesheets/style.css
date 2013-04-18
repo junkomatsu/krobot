@@ -1,8 +1,14 @@
 body {
   padding: 20px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Helvetica, sans-serif;
   background-repeat: no-repeat;
   background-size: 100%;
+}
+
+h1 {
+  font: 40px Helvetica, sans-serif;
+  margin-bottom: 100px;
+  color: #E30B5D;
 }
 
 a {
