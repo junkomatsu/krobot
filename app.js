@@ -36,7 +36,7 @@ var FACEBOOK_APP_ID = config.FACEBOOK_APP_ID;
 var FACEBOOK_APP_SECRET = config.FACEBOOK_APP_SECRET;
 var TWITTER_CONSUMER_KEY = config.TWITTER_CONSUMER_KEY;
 var TWITTER_CONSUMER_SECRET = config.TWITTER_CONSUMER_SECRET;
-
+var hostname = '192.168.3.120:3000';
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -59,7 +59,7 @@ passport.use(new FacebookStrategy(
 {
   clientID: FACEBOOK_APP_ID,
   clientSecret: FACEBOOK_APP_SECRET,
-  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  callbackURL: "http://" + hostname + "/auth/facebook/callback",
 },
 function(accessToken, refreshToken, profile, done) {
   passport.session.accessToken = accessToken;
@@ -77,7 +77,7 @@ passport.use(new TwitterStrategy(
 {
   consumerKey: TWITTER_CONSUMER_KEY,
   consumerSecret: TWITTER_CONSUMER_SECRET,
-  callbackURL: "http://localhost:3000/auth/twitter/callback"
+  callbackURL: "http://" + hostname + "/auth/twitter/callback"
 },
 function(token, tokenSecret, profile, done) {
   passport.session.accessToken = token;
